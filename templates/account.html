@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Account</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #f8f9fa, #e0f7fa);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 40px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #007bff;
+      margin-bottom: 30px;
+    }
+
+    .user-info {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .user-info strong {
+      display: inline-block;
+      width: 140px;
+      color: #444;
+    }
+
+    .logout-btn {
+      display: block;
+      margin: 30px auto 0;
+      padding: 12px 25px;
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>User Account</h1>
+
+    <div class="user-info">
+      <p><strong>Name:</strong> {{ user_data['name'] }}</p>
+      <p><strong>Email:</strong> {{ user_data['email'] }}</p>
+      <p><strong>Phone:</strong> {{ user_data['phone'] }}</p>
+      <p><strong>Age:</strong> {{ user_data['age'] }}</p>
+      <p><strong>Address:</strong> {{ user_data['address'] }}</p>
+    </div>
+
+    <form action="{{ url_for('logout') }}" method="post">
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+  </div>
+</body>
+</html>

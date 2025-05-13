@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload & Predict</title>
+    <style>
+        body {
+            background: url("/static/images/bg.jpg") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            margin: auto;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #ffcc00;
+        }
+
+        input[type="file"], button {
+            margin: 10px 0;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            border: none;
+            width: 100%;
+        }
+
+        button {
+            background-color: #ff5722;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e64a19;
+        }
+
+        img {
+            width: 250px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        a.download {
+            color: #00ffcc;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    {% if blood_group %}
+        <h2>Predicted Blood Group: {{ blood_group }}</h2>
+        {% if blood_image %}
+            <img src="/{{ blood_image }}" alt="Blood Group Image">
+        {% endif %}
+        {% if report_path %}
+            <br><br>
+            <a href="{{ url_for('download_report', report_path=report_path) }}" class="download">
+                <button>Download Report (PDF)</button>
+            </a>
+        {% endif %}
+        <br><br>
+        <a href="{{ url_for('procedure') }}"><button>Upload Another</button></a>
+    {% else %}
+        <h2>Upload Fingerprint</h2>
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" required>
+            {% if user_data %}
+                {% for key, value in user_data.items() %}
+                    <input type="hidden" name="{{ key }}" value="{{ value }}">
+                {% endfor %}
+            {% endif %}
+            <button type="submit">Upload & Predict</button>
+        </form>
+    {% endif %}
+</div>
+
+</body>
+</html>

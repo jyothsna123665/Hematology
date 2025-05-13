@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hematology Type Detection Report</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 40px;
+      background: linear-gradient(to bottom right, #e0f7fa, #ffffff);
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fa1b1b;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .date-time {
+      text-align: left;
+      font-size: 16px;
+      margin-bottom: 10px;
+      padding: 15px 25px;
+      background-color: #c8ece1;
+      border-left: 5px solid rgb(250, 27, 27);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      color: #fa1b1b;
+      border-bottom: 2px solid #fa1b1b;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #c8ece1;
+      border-left: 6px solid rgb(250, 27, 27);
+      border-radius: 10px;
+      padding: 25px 30px;
+      margin: 25px 0;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .field {
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .field strong {
+      width: 200px;
+      display: inline-block;
+      color: #333;
+    }
+
+    .image-section img {
+      display: block;
+      margin: 15px auto;
+      max-width: 300px;
+      border: 3px solid #00b4d8;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .footer {
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 50px;
+      color: #d62828;
+    }
+
+    .developers {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 10px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>HEMATOLOGY TYPE DETECTION VIA RIDGE PATTERNS</h1>
+
+  <div class="date-time">
+    <p><strong>Date:</strong> {{ now.strftime('%d/%m/%Y') }}</p>
+    <p><strong>Time:</strong> {{ now.strftime('%H:%M:%S') }}</p>
+  </div>
+
+  <div class="card">
+    <h2>Person Details</h2>
+    <div class="field"><strong>Name:</strong> {{ user_data['name'] }}</div>
+    <div class="field"><strong>Phone Number:</strong> {{ user_data['phone'] }}</div>
+    <div class="field"><strong>Email:</strong> {{ user_data['email'] }}</div>
+    <div class="field"><strong>Address:</strong> {{ user_data['address'] }}</div>
+    <div class="field"><strong>Age:</strong> {{ user_data['age'] }}</div>
+    <div class="field"><strong>Blood Group:</strong> {{ blood_group }}</div>
+  </div>
+
+  <div class="card image-section">
+    <h2>Blood Group Image</h2>
+    {% if blood_image %}
+  <img src="{{ url_for('static', filename=blood_image.split('static/')[1]) }}" alt="Blood Group Image">
+{% else %}
+  <p>No blood group image available.</p>
+{% endif %}
+
+  </div>
+
+  <div class="card">
+    <h2>Description</h2>
+    <div class="field"><strong>You can give blood to:</strong> {{ giving_blood_group }}</div>
+    <div class="field"><strong>You can take blood from:</strong> {{ receiving_blood_group }}</div>
+  </div>
+  {% if report_path %}
+  <div style="text-align: center; margin-top: 20px;">
+    <a href="{{ url_for('static', filename='reports/' + report_path.split('/')[-1]) }}" download class="button">Download PDF Report</a>
+  </div>
+{% endif %}
+
+
+  <div class="footer">
+    YOU DON'T HAVE TO BE A DOCTOR TO SAVE LIVES – JUST DONATE BLOOD
+  </div>
+
+  <div class="developers">
+    Developed By: Jakka Venkata Jyothsna, Cherukuri Angel Jyothi, Kota Venkata Gnana Lahari, Chivukula Venkata Dattatreya Sarma.
+  </div>
+
+  <p>Generated on: {{ now }}</p>
+</body>
+</html>

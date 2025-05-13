@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Procedure</title>
+    <style>
+        body {
+           background: url("/static/images/process.jpg") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+
+        }
+        h1 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .button-container {
+             display: flex;
+             justify-content: space-between;
+             width: 70%;
+             margin: 400px auto;
+}
+
+        .button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #fa1b1b;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="button-container">
+
+        <form action="{{ url_for('details_unknown') }}" method="get">
+            <button type="submit" class="button">Details Unknown</button>
+        </form>
+
+        <form action="{{ url_for('details_known') }}" method="get">
+            <button type="submit" class="button">Details Known</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
